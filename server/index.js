@@ -14,8 +14,18 @@ const ngrok =
 const { resolve } = require('path');
 const app = express();
 
+// const mongoose = require('mongoose'); //sc
+// const models = require('../database/index.js'); //sc
+
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+
+// if (isDev) {  //sc
+//   app.use(express.errorHandler());
+//   mongoose.connect('mongodb://localhost:27017/immortal');
+// } ???
+
+
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {

@@ -12,14 +12,36 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import styled from 'styled-components';
+
+const Wrapper = styled.section`
+  background: black;
+  margin: 20px;
+  padding: 10px;
+  color: white; 
+  text-align: center;
+`
+const Image = styled.img`
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+`
+const H1 = styled.h1`
+  font-size: 3em;
+  font-weight: bold;
+`
 
 /* eslint-disable react/prefer-stateless-function */
 export default class HomePage extends React.PureComponent {
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <Wrapper>
+        <H1>
+          <FormattedMessage {...messages.header} />
+        </H1>
+        <Image src={'https://generated.inspirobot.me/a/8Reaxjz6Lo.jpg'} />
+      </Wrapper>
     );
   }
 }
