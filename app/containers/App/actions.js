@@ -9,7 +9,7 @@
 // export function botWisdomSuccess(url) {
 //   return {
 //     type: BOT_WISDOM_SUCCESS,
-//     url: url 
+//     url: url
 //   };
 // }
 
@@ -20,4 +20,4 @@
 //   };
 // }
 
-//-------------moved to bot componenet-----------//
+// -------------moved to bot componenet-----------//

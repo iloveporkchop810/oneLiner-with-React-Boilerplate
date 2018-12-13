@@ -24,8 +24,8 @@ export default function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/input" component={InputPage}/>
-        <Route path="/output" component={OutputPage}/>
+        <Route path="/input" component={InputPage} />
+        <Route path="/output" component={OutputPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

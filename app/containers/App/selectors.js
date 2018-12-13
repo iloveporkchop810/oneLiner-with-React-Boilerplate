@@ -7,9 +7,6 @@ const makeSelectLocation = () =>
     routerState.get('location').toJS(),
   );
 
-export {
-  makeSelectLocation 
-};
+export { makeSelectLocation };
 
-
-//...dont really know where this is used...
+// ...dont really know where this is used...

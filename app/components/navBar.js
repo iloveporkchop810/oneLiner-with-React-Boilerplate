@@ -9,7 +9,7 @@ const HeaderContainer = styled.section`
   display: flex;
   align-items: center;
   justify-items: center;
-`
+`;
 
 const Button = styled.button`
   border: 1px solid DarkSlateGrey;
@@ -19,16 +19,26 @@ const Button = styled.button`
   margin: 10px;
   font-weight: bold;
   color: DarkSlateGrey;
-`
+`;
 
-const NavBar = () => {
-  return (
-    <HeaderContainer>
-      <div><Link to={'/'}><Button>Home</Button></Link></div>
-      <div><Link to={'/input'}><Button>Input Page</Button></Link></div>
-      <div><Link to={'/output'}><Button>Output Page</Button></Link></div>
-    </HeaderContainer>
-  )
-}
+const NavBar = () => (
+  <HeaderContainer>
+    <div>
+      <Link to="/">
+        <Button>Home</Button>
+      </Link>
+    </div>
+    <div>
+      <Link to="/input">
+        <Button>Input Page</Button>
+      </Link>
+    </div>
+    <div>
+      <Link to="/output">
+        <Button>Output Page</Button>
+      </Link>
+    </div>
+  </HeaderContainer>
+);
 
 export default NavBar;

@@ -1,4 +1,3 @@
-
 export const SAVE_TO_DB = 'app/InputPage/SAVE_TO_DB';
 export const SAVE_SUCCESS = 'app/InputPage/SAVE_SUCCESS';
 export const SAVE_FAIL = 'app/InputPage/SAVE_FAIL';

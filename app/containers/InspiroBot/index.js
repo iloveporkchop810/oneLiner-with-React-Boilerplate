@@ -5,19 +5,20 @@ import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 
 import injectSaga from 'utils/injectSaga';
-import {  
+import {
   makeSelectLoading,
   makeSelectError,
-  makeSelectBotUrl } from './selectors'
-  // from '../App/selectors';
-import { requestBotWisdom } from './actions'
+  makeSelectBotUrl,
+} from './selectors';
+// from '../App/selectors';
+import { requestBotWisdom } from './actions';
 // from '../App/actions';
 import saga from './sagas';
 
 const InputContainer = styled.div`
   diplay: inline-block;
   font-style: italic;
-`
+`;
 const Button = styled.button`
   border: 1px solid DarkSlateGrey;
   border-radius: 1em;
@@ -26,7 +27,7 @@ const Button = styled.button`
   margin: 10px;
   font-weight: bold;
   color: DarkSlateGrey;
-`
+`;
 export class InspiroBot extends React.PureComponent {
   render() {
     const { loading, error, botWisdom } = this.props;
@@ -34,39 +35,46 @@ export class InspiroBot extends React.PureComponent {
       <InputContainer>
         CONSULT THE PHILOSOPHICAL BOT
         <Button
-          onClick={() => {this.props.callToBot()}}
+          onClick={() => {
+            this.props.callToBot();
+          }}
         >
-          InspiroBot</Button>
-        {loading 
-          ? <p>Thinking hard...</p> 
-          : error
-            ? <p>BrainFart, try again...</p> 
-            : <p><img src={botWisdom} /></p>}
+          InspiroBot
+        </Button>
+        {loading ? (
+          <p>Thinking hard...</p>
+        ) : error ? (
+          <p>BrainFart, try again...</p>
+        ) : (
+          <p>
+            <img src={botWisdom} />
+          </p>
+        )}
       </InputContainer>
-    )
+    );
   }
 }
 
 export function mapDispatchToProps(dispatch) {
   return {
-    callToBot: () => dispatch(requestBotWisdom())
+    callToBot: () => dispatch(requestBotWisdom()),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
   botWisdom: makeSelectBotUrl(),
   loading: makeSelectLoading(),
-  error: makeSelectError()
+  error: makeSelectError(),
 });
 
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 );
 
-const withSaga = injectSaga({ key: 'bot', saga});
+const withSaga = injectSaga({ key: 'bot', saga });
 
 export default compose(
   withConnect,
-  withSaga
+  withSaga,
 )(InspiroBot);

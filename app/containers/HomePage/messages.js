@@ -10,6 +10,7 @@ export const scope = 'app.containers.HomePage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Immortalize your clever one-liners! Or collect from the Philosophical Robot!',
+    defaultMessage:
+      'Immortalize your clever one-liners! Or collect from the Philosophical Robot!',
   },
 });

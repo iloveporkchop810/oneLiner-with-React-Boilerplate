@@ -25,8 +25,6 @@ const app = express();
 //   mongoose.connect('mongodb://localhost:27017/immortal');
 // } ???
 
-
-
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),

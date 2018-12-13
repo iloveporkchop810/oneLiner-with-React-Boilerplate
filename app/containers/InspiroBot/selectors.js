@@ -4,7 +4,7 @@ const selectRouter = state => state.get('router');
 
 const selectGlobal = state => state.get('bot');
 
-const makeSelectLoading = () => 
+const makeSelectLoading = () =>
   createSelector(selectGlobal, globalState => globalState.get('loading'));
 
 const makeSelectError = () =>
@@ -22,6 +22,6 @@ export {
   selectGlobal,
   makeSelectLoading,
   makeSelectError,
-  makeSelectBotUrl, 
-  makeSelectLocation 
+  makeSelectBotUrl,
+  makeSelectLocation,
 };

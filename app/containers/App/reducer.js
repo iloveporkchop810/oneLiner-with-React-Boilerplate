@@ -13,7 +13,7 @@
 //       return state
 //         .set('loading', true)
 //         .set('error', false);
-//     case BOT_WISDOM_SUCCESS: 
+//     case BOT_WISDOM_SUCCESS:
 //       return state
 //         .set('loading', false)
 //         .set('error', false)
@@ -29,4 +29,4 @@
 
 // export default appReducer;
 
-//------move to Bot component-------//
+// ------move to Bot component-------//
