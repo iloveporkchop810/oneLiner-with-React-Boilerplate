@@ -19,7 +19,7 @@ export function* deletFromDatabase() {
   const oneliners = yield select(makeSelectOneLiners());
   const onelinersArr = oneliners.toArray();
   const key = yield select(makeSelectKey());
-  const searchId = onelinersArr[key]['_id'];
+  const searchId = onelinersArr[key]._id;
   const dbPath = 'http://localhost:3000/api/oneliners/remove';
 
   try {

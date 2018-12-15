@@ -24,7 +24,6 @@ const saveToDb = (inputObj, callback) => {
       return callback(err, null);
     }
     return callback(null, response);
-    
   });
 };
 
@@ -37,10 +36,10 @@ const fetchOneLiners = callback => {
       if (err) {
         console.error('geterror: ', err);
         return callback(err, null);
-      } 
+      }
       return callback(null, oneLiners);
     },
-  )
+  );
 };
 
 const deleteOneLiner = (searchId, callback) => {
@@ -50,7 +49,6 @@ const deleteOneLiner = (searchId, callback) => {
       return callback(err, null);
     }
     return callback(null, response);
-    
   });
 };
 

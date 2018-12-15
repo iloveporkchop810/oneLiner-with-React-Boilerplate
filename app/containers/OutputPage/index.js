@@ -62,7 +62,7 @@ Output.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   success: PropTypes.bool,
-  onDelete: PropTypes.func
+  onDelete: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
