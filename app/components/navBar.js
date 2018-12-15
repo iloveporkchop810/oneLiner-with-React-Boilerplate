@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Button from 'components/Button';
 
 const HeaderContainer = styled.section`
   background: Silver;
@@ -9,16 +10,6 @@ const HeaderContainer = styled.section`
   display: flex;
   align-items: center;
   justify-items: center;
-`;
-
-const Button = styled.button`
-  border: 1px solid DarkSlateGrey;
-  border-radius: 1em;
-  background: LightSlateGrey;
-  padding: 10px;
-  margin: 10px;
-  font-weight: bold;
-  color: DarkSlateGrey;
 `;
 
 const NavBar = () => (

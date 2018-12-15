@@ -5,7 +5,7 @@ import {
   BOT_WISDOM_FAIL,
 } from './constants';
 
-const initialState = fromJS({
+export const initialState = fromJS({
   loading: false,
   error: false,
   botWisdom: '',

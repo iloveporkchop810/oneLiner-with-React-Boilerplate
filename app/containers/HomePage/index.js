@@ -10,17 +10,20 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import messages from './messages';
+import Wrapper from 'components/Wrapper';
 
-const Wrapper = styled.section`
-  background: black;
-  margin: 20px;
-  padding: 10px;
-  color: white;
-  text-align: center;
-`;
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import injectSaga from 'utils/injectSaga';
+import messages from './messages';
+import saga from './sagas';
+import { retrieveFromDB } from '../App/actions';
+import { makeSelectOneLiners } from '../App/selectors';
+
 const Image = styled.img`
   width: 40%;
   display: block;
@@ -33,7 +36,13 @@ const H1 = styled.h1`
 `;
 
 /* eslint-disable react/prefer-stateless-function */
-export default class HomePage extends React.PureComponent {
+class HomePage extends React.PureComponent {
+  componentDidMount() {
+    if (this.props.oneLiner.size === 0) {
+      this.props.getAllOneLiners();
+    }
+  }
+
   render() {
     return (
       <Wrapper>
@@ -45,3 +54,28 @@ export default class HomePage extends React.PureComponent {
     );
   }
 }
+
+HomePage.propTypes = {
+  oneLiner: PropTypes.object,
+  getAllOneLiners: PropTypes.func,
+};
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    getAllOneLiners: () => dispatch(retrieveFromDB()),
+  };
+}
+
+const withConnect = connect(
+  createStructuredSelector({
+    oneLiner: makeSelectOneLiners(),
+  }),
+  mapDispatchToProps,
+);
+
+const withSaga = injectSaga({ key: 'output', saga });
+
+export default compose(
+  withConnect,
+  withSaga,
+)(HomePage);

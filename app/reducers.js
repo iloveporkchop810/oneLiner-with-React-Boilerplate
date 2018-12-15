@@ -7,7 +7,7 @@ import { connectRouter } from 'connected-react-router/immutable';
 
 import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-import botReducer from 'containers/InspiroBot/reducer';
+import globalReducer from 'containers/App/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -15,7 +15,7 @@ import botReducer from 'containers/InspiroBot/reducer';
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     language: languageProviderReducer,
-    bot: botReducer,
+    global: globalReducer,
     ...injectedReducers,
   });
 

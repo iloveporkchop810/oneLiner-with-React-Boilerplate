@@ -1,28 +1,59 @@
-// const mongoose = require('mongoose');
-// // var Schema = require('./schema');
-// // mongoose.connect('mongodb://localhost:27017/immortal');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/immortal');
 
-// // var db = mongoose.connection;
-// // db.on('error', console.error.bind(console, 'connection error:'));
-// // db.once('open', function() {
+const oneLinerSchema = new mongoose.Schema({
+  userInput: String,
+  author: String,
+  category: {
+    type: String,
+    required: false,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-// // })
+const OneLiner = mongoose.model('OneLiner', oneLinerSchema);
 
-// let oneLinerSchema = mongoose.Schema({
-//   id: { type: Number,
-//         unique: true
-//       },
-//   input: String,
-//   author: String,
-//   category: { type: String,
-//               required: false
-//             },
-//   date: Date.now
+const saveToDb = (inputObj, callback) => {
+  const newOneLiner = new OneLiner(inputObj);
+  newOneLiner.save((err, response) => {
+    if (err) {
+      console.error('posterror: ', err);
+      return callback(err, null);
+    }
+    return callback(null, response);
+    
+  });
+};
 
-// })
+const fetchOneLiners = callback => {
+  OneLiner.find(
+    {},
+    null,
+    { sort: { date: -1 }, limit: 50 },
+    (err, oneLiners) => {
+      if (err) {
+        console.error('geterror: ', err);
+        return callback(err, null);
+      } 
+      return callback(null, oneLiners);
+    },
+  )
+};
 
-// let oneLiner = mongoose.model('oneLiner', oneLinerSchema);
+const deleteOneLiner = (searchId, callback) => {
+  OneLiner.deleteOne({ _id: searchId.id }, (err, response) => {
+    if (err) {
+      console.error('deleteError: ', err);
+      return callback(err, null);
+    }
+    return callback(null, response);
+    
+  });
+};
 
-// let fetchOneLiners = (callback) => {
-//   oneLiner.find({}, )
-// }
+module.exports.saveToDb = saveToDb;
+module.exports.fetchOneLiners = fetchOneLiners;
+module.exports.deleteOneLiner = deleteOneLiner;

@@ -14,7 +14,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import InputPage from '../InputPage/index';
 import OutputPage from '../OutputPage/index';
-import NavBar from '../../components/navBar';
+import NavBar from '../../components/NavBar';
 
 import GlobalStyle from '../../global-styles';
 
@@ -26,7 +26,7 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/input" component={InputPage} />
         <Route path="/output" component={OutputPage} />
-        <Route component={NotFoundPage} />
+        <Route path="" component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
     </div>

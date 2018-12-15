@@ -11,6 +11,6 @@ export default defineMessages({
   header: {
     id: `${scope}.header`,
     defaultMessage:
-      'Immortalize your clever one-liners! Or collect from the Philosophical Robot!',
+      'Immortalize your clever one-liners! Or collect from the Philosophical AI Robot!',
   },
 });

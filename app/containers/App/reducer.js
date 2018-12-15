@@ -1,32 +1,67 @@
-// import { REQUEST_BOT_WISDOM, BOT_WISDOM_SUCCESS, BOT_WISDOM_FAIL } from './constants';
-// import { fromJS } from 'immutable';
+import { fromJS, List } from 'immutable';
+import {
+  SAVE_TO_DB,
+  RETRIEVE_FROM_DB,
+  DELETE_FROM_DB,
+  EDIT_TO_DB,
+  DBUD_SUCCESS,
+  DB_SUCCESS,
+  DB_FAIL,
+  GRAB_KEY,
+} from './constants';
 
-// const initialState = fromJS({
-//   loading: false,
-//   error: false,
-//   botWisdom: ''
-// });
+const initialState = fromJS({
+  loading: false,
+  error: false,
+  success: false,
+  oneLiners: [],
+  key: '',
+});
 
-// function appReducer(state = initialState, action) {
-//   switch(action.type) {
-//     case REQUEST_BOT_WISDOM:
-//       return state
-//         .set('loading', true)
-//         .set('error', false);
-//     case BOT_WISDOM_SUCCESS:
-//       return state
-//         .set('loading', false)
-//         .set('error', false)
-//         .set('botWisdom', action.url);
-//     case BOT_WISDOM_FAIL:
-//       return state
-//         .set('loading', false)
-//         .set('error', action.error);
-//     default:
-//       return state;
-//   }
-// }
+function globalReducer(state = initialState, action) {
+  const oldArrState = state.get('oneLiners');
+  let newArrState;
+  switch (action.type) {
+    case SAVE_TO_DB:
+      return state.set('loading', true).set('error', false);
+    case RETRIEVE_FROM_DB:
+      return state.set('loading', true).set('error', false);
+    case DELETE_FROM_DB:
+      return state.set('loading', true).set('error', false);
+    case GRAB_KEY:
+      return state.set('key', action.key);
+    case EDIT_TO_DB:
+      return state
+        .set('loading', true)
+        .set('error', false)
+        .set('key', action.key);
 
-// export default appReducer;
+    case DBUD_SUCCESS:
+      if (action.update) {
+        newArrState = oldArrState.update(action.key, () => action.update);
+      } else {
+        newArrState = oldArrState.splice(action.key, 1);
+      }
+      return state
+        .set('loading', false)
+        .set('error', false)
+        .set('oneLiners', newArrState);
 
-// ------move to Bot component-------//
+    case DB_SUCCESS:
+      newArrState =
+        oldArrState.size === 0
+          ? List(action.payload)
+          : oldArrState.unshift(action.payload);
+      return state
+        .set('loading', false)
+        .set('error', false)
+        .set('oneLiners', newArrState);
+    case DB_FAIL:
+      return state.set('loading', false).set('error', action.error);
+
+    default:
+      return state;
+  }
+}
+
+export default globalReducer;

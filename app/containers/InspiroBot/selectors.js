@@ -1,27 +1,15 @@
 import { createSelector } from 'reselect';
+import { initialState } from './reducer';
 
-const selectRouter = state => state.get('router');
-
-const selectGlobal = state => state.get('bot');
+const selectBot = state => state.get('bot', initialState);
 
 const makeSelectLoading = () =>
-  createSelector(selectGlobal, globalState => globalState.get('loading'));
+  createSelector(selectBot, botState => botState.get('loading'));
 
 const makeSelectError = () =>
-  createSelector(selectGlobal, globalState => globalState.get('error'));
+  createSelector(selectBot, botState => botState.get('error'));
 
 const makeSelectBotUrl = () =>
-  createSelector(selectGlobal, globalState => globalState.get('botWisdom'));
+  createSelector(selectBot, botState => botState.get('botWisdom'));
 
-const makeSelectLocation = () =>
-  createSelector(selectRouter, routerState =>
-    routerState.get('location').toJS(),
-  );
-
-export {
-  selectGlobal,
-  makeSelectLoading,
-  makeSelectError,
-  makeSelectBotUrl,
-  makeSelectLocation,
-};
+export { selectBot, makeSelectLoading, makeSelectError, makeSelectBotUrl };
