@@ -9,6 +9,7 @@ import {
   DB_FAIL,
   GRAB_KEY,
 } from './constants';
+import placeholder from './placeholderData';
 
 const initialState = fromJS({
   loading: false,
@@ -45,16 +46,20 @@ function globalReducer(state = initialState, action) {
       return state
         .set('loading', false)
         .set('error', false)
+        .set('success', true)
         .set('oneLiners', newArrState);
 
     case DB_SUCCESS:
-      newArrState =
-        oldArrState.size === 0
-          ? List(action.payload)
-          : oldArrState.unshift(action.payload);
+      if (oldArrState.size === 0) {
+        newArrState =
+          action.payload.length > 0 ? List(action.payload) : List(placeholder);
+      } else {
+        newArrState = oldArrState.unshift(action.payload);
+      }
       return state
         .set('loading', false)
         .set('error', false)
+        .set('success', true)
         .set('oneLiners', newArrState);
     case DB_FAIL:
       return state.set('loading', false).set('error', action.error);

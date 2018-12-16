@@ -12,10 +12,10 @@ import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import InpiroBot from '../InspiroBot/index';
 import {
-  makeSelectLoading,
   makeSelectError,
   makeSelectSuccess,
 } from '../App/selectors';
+import { makeSelectUserInput, makeSelectAuthor } from './selectors';
 import { saveToDb } from '../App/actions';
 import { changeTextInput, changeAuthor } from './actions';
 import saga from './sagas';
@@ -38,7 +38,7 @@ const InputContainer = styled.div`
 
 export class InputPage extends React.PureComponent {
   render() {
-    const { loading, error } = this.props;
+    const { error, input, author } = this.props;
     return (
       <Wrapper>
         <H2>GIVE ME THAT CLEVER ONE LINER</H2>
@@ -47,6 +47,7 @@ export class InputPage extends React.PureComponent {
           <InputBox
             id="textInput"
             placeholder="Show me what you got!"
+            value={input}
             onChange={this.props.onChangeUserInput}
           />
         </InputContainer>
@@ -56,14 +57,11 @@ export class InputPage extends React.PureComponent {
             small
             id="author"
             placeholder="Author Name"
+            value={author}
             onChange={this.props.onChangeAuthor}
           />
           <Button onClick={this.props.onSubmit}>IMMORTALIZE</Button>
-          {loading ? (
-            <p>Saving your Oneliner...</p>
-          ) : error ? (
-            <p>Something went wrong...</p>
-          ) : null}
+          {error ? <p>Something went wrong...</p> : null}
         </InputContainer>
         <InpiroBot />
       </Wrapper>
@@ -72,8 +70,9 @@ export class InputPage extends React.PureComponent {
 }
 
 InputPage.propTypes = {
-  loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  input: PropTypes.string,
+  author: PropTypes.string,
   success: PropTypes.bool,
   onChangeUserInput: PropTypes.func,
   onChangeAuthor: PropTypes.func,
@@ -87,14 +86,17 @@ export function mapDispatchToProps(dispatch) {
     onSubmit: () => {
       dispatch(saveToDb());
       alert('Saved! Checkout the Output Page for your collection!');
+      dispatch(changeAuthor(''));
+      dispatch(changeTextInput(''));
     },
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  loading: makeSelectLoading(),
   error: makeSelectError(),
   success: makeSelectSuccess(),
+  input: makeSelectUserInput(),
+  author: makeSelectAuthor(),
 });
 
 const withConnect = connect(
