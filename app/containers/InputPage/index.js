@@ -11,10 +11,7 @@ import H2 from 'components/H2';
 import injectReducer from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import InpiroBot from '../InspiroBot/index';
-import {
-  makeSelectError,
-  makeSelectSuccess,
-} from '../App/selectors';
+import { makeSelectError, makeSelectSuccess } from '../App/selectors';
 import { makeSelectUserInput, makeSelectAuthor } from './selectors';
 import { saveToDb } from '../App/actions';
 import { changeTextInput, changeAuthor } from './actions';
